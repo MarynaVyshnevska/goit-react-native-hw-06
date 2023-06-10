@@ -91,13 +91,15 @@ export const authStateChangeUser = () => async (dispatch, getState) => {
           login: displayName,
           avatar: photoURL,
         };
-        dispatch(updateUserProfile(userUpdateProfile));
         dispatch(authStateChange({ stateChange: true }));
+        dispatch(updateUserProfile(userUpdateProfile));
       }
     } catch (error) {
       console.log("error", error);
       const errorMessage = error.message;
       console.log("errorMessage", errorMessage);
+      signOut(auth);
+      dispatch(authLogOutUser());
     }
   });
 };

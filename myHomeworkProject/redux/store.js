@@ -15,6 +15,7 @@ import { authReducer } from "./auth/authReducer";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
+  timeout: 10000,
 };
 
 const reducer = persistReducer(persistConfig, authReducer);

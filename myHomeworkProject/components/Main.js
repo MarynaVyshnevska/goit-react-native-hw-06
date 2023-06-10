@@ -6,16 +6,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useRoute } from "../router";
 
 import { authStateChangeUser } from "../redux/auth/authOperations";
+import { selectStateChange } from "../redux/auth/authSelector";
 
 const Main = () => {
   const dispatch = useDispatch();
   const [isReady, setIsReady] = useState(false);
   const state = useSelector((state) => state);
-  const { stateChange } = useSelector((state) => state);
+  const stateChange = useSelector(selectStateChange);
+  const routing = useRoute(stateChange);
+  // const routing = useRoute(false);
 
   useEffect(() => {
-    console.log(stateChange);
-    console.log("state", state);
+    // console.log(stateChange);
+    // console.log("state", state);
+    // dispatch(authStateChangeUser());
     dispatch(authStateChangeUser()).then(() => {
       setIsReady(true);
     });
@@ -30,8 +34,11 @@ const Main = () => {
 
   //**Автоматический вход в приложение если есть state - Не работает, */
   //** Работает только в случае первоначального null */
-  // const routing = useRoute(stateChange);
-  const routing = useRoute();
+  // const routing = useRoute(true);
+  // if (stateChange === true) {
+  //   // routing = useRoute(true);
+  //   return routing = useRoute(true);
+  // }
 
   return <NavigationContainer>{routing}</NavigationContainer>;
 };
