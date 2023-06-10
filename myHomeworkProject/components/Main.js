@@ -14,14 +14,15 @@ const Main = () => {
   const { stateChange } = useSelector((state) => state);
 
   useEffect(() => {
+    console.log(stateChange);
+    console.log("state", state);
     dispatch(authStateChangeUser()).then(() => {
       setIsReady(true);
     });
   }, []);
 
-  console.log("state", state);
-  console.log(stateChange);
-
+    console.log(stateChange);
+    console.log("state", state);
 
   if (!isReady) {
     return null;
